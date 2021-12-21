@@ -5,12 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch chrome",
-      "type": "pwa-chrome",
-      "request": "launch",
-      "url": "http://localhost:3001",
-      "webRoot": "${workspaceFolder}/src",
-      "skipFiles": ["<node_internals>/**/*.js", "${workspaceFolder}/node_modules/**"]
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to application",
+      "skipFiles": ["<node_internals>/**/*.js", "${workspaceFolder}/node_modules/**"],
+      "port": 9229
     }
   ]
 }

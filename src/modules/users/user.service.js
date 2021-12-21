@@ -1,0 +1,37 @@
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: 'http://localhost:3000/api/v1/',
+});
+
+export async function getAll({ skip = 0, limit = 100, sort, status, search }) {
+  try {
+    const response = await apiClient.get('/users', {
+      params: {
+        skip,
+        limit,
+        sort,
+        status,
+        search,
+      },
+    });
+
+    const users = response.data.data;
+
+    return users;
+  } catch (err) {
+    return err.response;
+  }
+}
+
+export async function getById({ userId }) {
+  try {
+    const response = await apiClient.get(`/users/${userId}`);
+
+    const userById = response.data.data;
+
+    return userById;
+  } catch (err) {
+    return err.response;
+  }
+}
