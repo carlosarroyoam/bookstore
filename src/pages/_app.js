@@ -1,5 +1,5 @@
 import Footer from '../shared/components/footer/Footer';
-import Main from '../shared/components/Main';
+import Main from '../shared/components/main/Main';
 import Header from '../shared/components/header/Header';
 import { Normalize } from 'styled-normalize';
 

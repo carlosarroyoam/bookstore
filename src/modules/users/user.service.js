@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3000/api/v1/',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 export async function getAll({ skip = 0, limit = 100, sort, status, search }) {

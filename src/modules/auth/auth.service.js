@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3000/api/v1/auth',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 export async function login({ email, password }) {
   try {
-    const response = await apiClient.post('/login', {
+    const response = await apiClient.post('/auth/login', {
       body: {
         email,
         password,
