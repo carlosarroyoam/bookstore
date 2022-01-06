@@ -20,7 +20,7 @@ export async function getAll({ skip = 0, limit = 100, sort, status, search }) {
 
     return users;
   } catch (err) {
-    throw err;
+    throw 'Error while retrieving users list';
   }
 }
 
@@ -32,6 +32,6 @@ export async function getById({ userId }) {
 
     return userById;
   } catch (err) {
-    throw err;
+    throw 'Error while retrieving user';
   }
 }

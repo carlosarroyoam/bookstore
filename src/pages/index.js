@@ -65,7 +65,7 @@ function UserList() {
   }
 
   if (status === 'rejected') {
-    return error.message;
+    return error;
   }
 
   if (status === 'resolved') {
