@@ -1,19 +1,20 @@
 import Footer from '../shared/components/footer/Footer';
+import Main from '../shared/components/Main';
 import Header from '../shared/components/header/Header';
 import { Normalize } from 'styled-normalize';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Normalize></Normalize>
+      <Normalize />
 
-      <Header></Header>
+      <Header />
 
-      <main>
+      <Main>
         <Component {...pageProps} />
-      </main>
+      </Main>
 
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
