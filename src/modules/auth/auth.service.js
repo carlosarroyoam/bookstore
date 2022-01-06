@@ -17,6 +17,6 @@ export async function login({ email, password }) {
 
     return userDetails;
   } catch (err) {
-    return err.response;
+    throw err;
   }
 }
