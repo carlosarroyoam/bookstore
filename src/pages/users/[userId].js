@@ -3,7 +3,6 @@ import { getById } from '../../modules/users/user.service';
 function UserDetails({ userById }) {
   return (
     <>
-      <h2>User Details</h2>
       <p>
         {userById.first_name} {userById.last_name}
       </p>

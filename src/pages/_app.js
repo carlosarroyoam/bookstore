@@ -7,13 +7,13 @@ import Header from '../shared/components/header/Header';
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
 
       <Main>
         <Component {...pageProps} />
       </Main>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

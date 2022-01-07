@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAll } from '../modules/users/user.service';
 import { formatToDate, formatToTime } from '../shared/utils/dates.util';
+import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
 
 function UserList() {
   const [orderBy, setOrderBy] = useState('first_name');
@@ -31,10 +32,8 @@ function UserList() {
         setStatus('idle');
         const users = await getAll({ sort: orderBy });
 
-        setTimeout(() => {
-          setUsers(users);
-          setStatus('resolved');
-        }, 100);
+        setUsers(users);
+        setStatus('resolved');
       } catch (err) {
         setError(err);
         setStatus('rejected');
@@ -52,7 +51,7 @@ function UserList() {
     return error;
   }
 
-  if (status === 'resolved') {
+  if (status === 'resolved' || status === 'idle') {
     if (users?.length === 0) {
       return "there's no users";
     }
@@ -63,80 +62,108 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <table>
-          <tr>
-            <th />
-            <th>
-              NAME
-              <button onClick={handleNameButtonClick}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-arrow-down"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
-                  />
-                </svg>
-              </button>
-            </th>
-            <th>
-              EMAIL
-              <button onClick={handleEmailButtonClick}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-arrow-down"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
-                  />
-                </svg>
-              </button>
-            </th>
-            <th>ROLE</th>
-            <th>REGISTERED</th>
-            <th>STATUS</th>
-            <th>EDIT</th>
-          </tr>
-
-          <tbody>
-            {users?.map((user) => {
-              return (
-                <tr key={user.id}>
-                  <td>
-                    <Image
-                      height="48px"
-                      width="48px"
-                      src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}&format=svg`}
-                      alt={`${user.first_name}'s profile picture'`}
-                    ></Image>
-                  </td>
-                  <td>
-                    {user.first_name} {user.last_name}
-                  </td>
-                  <td>{user.email}</td>
-                  <td>{user.user_role.replace('App/', '')}</td>
-                  <td>
-                    {formatToDate(user.created_at)} a las {formatToTime(user.created_at)}
-                  </td>
-                  <td>{user.deleted_at !== null ? 'Inactive' : 'Active'}</td>
-                  <td>
-                    <Link href={`/users/${user.id}`}>Edit</Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="flex flex-col mt-10">
+          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="flex align-middle px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        NAME
+                        <button className="ml-auto" onClick={handleNameButtonClick}>
+                          {orderBy === 'first_name' ? (
+                            <ArrowNarrowUpIcon className="h-4 w-4 text-gray-500" />
+                          ) : (
+                            <ArrowNarrowDownIcon className="h-4 w-4 text-gray-500" />
+                          )}
+                        </button>
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        EMAIL
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        ROLE
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        REGISTERED
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        STATUS
+                      </th>
+                      <th className="relative px-6 py-3">
+                        <span className="sr-only">Edit</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {users?.map((user) => {
+                      return (
+                        <tr key={user.id}>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <div className="flex-shrink-0 h-10 w-10">
+                                <Image
+                                  className="h-10 w-10 rounded-full"
+                                  height="48px"
+                                  width="48px"
+                                  src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}&format=svg`}
+                                  alt={`${user.first_name}'s profile picture'`}
+                                ></Image>{' '}
+                              </div>
+                              <div className="ml-4">
+                                <div className="text-sm font-medium text-gray-700">
+                                  {user.first_name} {user.last_name}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-500">
+                              <Link href={`mailto:${user.email}`}>
+                                <a className="text-sm font-medium text-blue-400 hover:text-blue-700">
+                                  {user.email}
+                                </a>
+                              </Link>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className=" text-sm text-gray-500">
+                              {user.user_role.replace('App/', '')}{' '}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className=" text-sm text-gray-500">
+                              {formatToDate(user.created_at)} a las {formatToTime(user.created_at)}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span
+                              className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                user.deleted_at !== null
+                                  ? 'bg-red-100 text-red-800'
+                                  : 'bg-green-100 text-green-800'
+                              }`}
+                            >
+                              {user.deleted_at !== null ? 'Inactive' : 'Active'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <Link href={`/users/${user.id}`}>
+                              <a className="text-sm font-medium text-blue-400 hover:text-blue-700">
+                                Edit
+                              </a>
+                            </Link>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </>
     );
   }
