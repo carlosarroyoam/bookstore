@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
 import { getAll } from '../modules/users/user.service';
 import { formatToDate, formatToTime } from '../shared/utils/dates.util';
-import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
 
 function UserList() {
   const [orderBy, setOrderBy] = useState('first_name');
@@ -51,7 +51,7 @@ function UserList() {
     return error;
   }
 
-  if (status === 'resolved' || status === 'idle') {
+  if (status === 'resolved') {
     if (users?.length === 0) {
       return "there's no users";
     }
@@ -61,6 +61,8 @@ function UserList() {
         <Head>
           <title>Users</title>
         </Head>
+
+        <h1 className="text-2xl text-gray-900 font-semibold mt-10">Users</h1>
 
         <div className="flex flex-col mt-10">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
