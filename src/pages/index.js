@@ -4,22 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAll } from '../modules/users/user.service';
 import { formatToDate, formatToTime } from '../shared/utils/dates.util';
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableData,
-  TableRow,
-  TableHeader,
-} from '../shared/components/table/Table';
-import styled from 'styled-components';
-
-const ProfilePicture = styled(Image)`
-  border-radius: 50%;
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
-`;
 
 function UserList() {
   const [orderBy, setOrderBy] = useState('first_name');
@@ -70,7 +54,7 @@ function UserList() {
 
   if (status === 'resolved') {
     if (users?.length === 0) {
-      return 'no users in system';
+      return "there's no users";
     }
 
     return (
@@ -79,81 +63,80 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeader>
-                NAME
-                <button onClick={handleNameButtonClick}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-arrow-down"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
-                    />
-                  </svg>
-                </button>
-              </TableHeader>
-              <TableHeader>
-                EMAIL
-                <button onClick={handleEmailButtonClick}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-arrow-down"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
-                    />
-                  </svg>
-                </button>
-              </TableHeader>
-              <TableHeader>ROLE</TableHeader>
-              <TableHeader>REGISTERED</TableHeader>
-              <TableHeader>STATUS</TableHeader>
-              <TableHeader>EDIT</TableHeader>
-            </TableRow>
-          </TableHead>
+        <table>
+          <tr>
+            <th />
+            <th>
+              NAME
+              <button onClick={handleNameButtonClick}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-arrow-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
+                  />
+                </svg>
+              </button>
+            </th>
+            <th>
+              EMAIL
+              <button onClick={handleEmailButtonClick}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-arrow-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
+                  />
+                </svg>
+              </button>
+            </th>
+            <th>ROLE</th>
+            <th>REGISTERED</th>
+            <th>STATUS</th>
+            <th>EDIT</th>
+          </tr>
 
-          <TableBody>
+          <tbody>
             {users?.map((user) => {
               return (
-                <TableRow key={user.id}>
-                  <TableData>
-                    <ProfilePicture
+                <tr key={user.id}>
+                  <td>
+                    <Image
                       height="48px"
                       width="48px"
-                      src={`https://ui-avatars.com/api/?name=${
-                        user.first_name + ' ' + user.last_name
-                      }&format=svg`}
+                      src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}&format=svg`}
                       alt={`${user.first_name}'s profile picture'`}
-                    ></ProfilePicture>
+                    ></Image>
+                  </td>
+                  <td>
                     {user.first_name} {user.last_name}
-                  </TableData>
-                  <TableData>{user.email}</TableData>
-                  <TableData>{user.user_role.replace('App/', '')}</TableData>
-                  <TableData>
+                  </td>
+                  <td>{user.email}</td>
+                  <td>{user.user_role.replace('App/', '')}</td>
+                  <td>
                     {formatToDate(user.created_at)} a las {formatToTime(user.created_at)}
-                  </TableData>
-                  <TableData>{user.deleted_at !== null ? 'Inactive' : 'Active'}</TableData>
-                  <TableData>
+                  </td>
+                  <td>{user.deleted_at !== null ? 'Inactive' : 'Active'}</td>
+                  <td>
                     <Link href={`/users/${user.id}`}>Edit</Link>
-                  </TableData>
-                </TableRow>
+                  </td>
+                </tr>
               );
             })}
-          </TableBody>
-        </Table>
+          </tbody>
+        </table>
       </>
     );
   }

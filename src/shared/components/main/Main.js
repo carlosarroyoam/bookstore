@@ -1,3 +1,3 @@
 export default function Main({ children }) {
-  return <main>{children}</main>;
+  return <main className="container">{children}</main>;
 }
