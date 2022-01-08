@@ -7,7 +7,7 @@ import { getAll } from '../modules/users/user.service';
 import { formatToDate, formatToTime } from '../shared/utils/dates.util';
 
 function UserList() {
-  const [orderBy, setOrderBy] = useState('first_name');
+  const [orderBy, setOrderBy] = useState(null);
   const [users, setUsers] = useState([]);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
@@ -16,13 +16,6 @@ function UserList() {
     setOrderBy((currentValue) => {
       if (currentValue === 'first_name') setOrderBy('-first_name');
       else setOrderBy('first_name');
-    });
-  };
-
-  const handleEmailButtonClick = () => {
-    setOrderBy((currentValue) => {
-      if (currentValue === 'email') setOrderBy('-email');
-      else setOrderBy('email');
     });
   };
 
@@ -44,16 +37,40 @@ function UserList() {
   }, [orderBy]);
 
   if (status === 'idle') {
-    return 'loading...';
+    return (
+      <>
+        <Head>
+          <title>Users</title>
+        </Head>
+
+        <h1 className="mt-10 text-2xl font-semibold text-gray-900">loading...</h1>
+      </>
+    );
   }
 
   if (status === 'rejected') {
-    return error;
+    return (
+      <>
+        <Head>
+          <title>Users</title>
+        </Head>
+
+        <h1 className="mt-10 text-2xl font-semibold text-gray-900">{error}</h1>
+      </>
+    );
   }
 
   if (status === 'resolved') {
     if (users?.length === 0) {
-      return "there's no users";
+      return (
+        <>
+          <Head>
+            <title>Users</title>
+          </Head>
+
+          <h1 className="mt-10 text-2xl font-semibold text-gray-900">There is no users</h1>
+        </>
+      );
     }
 
     return (
@@ -62,35 +79,35 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <h1 className="text-2xl text-gray-900 font-semibold mt-10">Users</h1>
+        <h1 className="mt-10 text-2xl font-semibold text-gray-900">Users</h1>
 
         <div className="flex flex-col mt-8">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-100">
                     <tr>
-                      <th className="flex align-middle px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <th className="flex px-6 py-3 text-xs font-semibold tracking-wider text-left text-gray-500 uppercase align-middle">
                         NAME
                         <button className="ml-auto" onClick={handleNameButtonClick}>
                           {orderBy === 'first_name' ? (
-                            <ArrowNarrowUpIcon className="h-4 w-4 text-gray-500" />
+                            <ArrowNarrowUpIcon className="w-4 h-4 text-gray-500" />
                           ) : (
-                            <ArrowNarrowDownIcon className="h-4 w-4 text-gray-500" />
+                            <ArrowNarrowDownIcon className="w-4 h-4 text-gray-500" />
                           )}
                         </button>
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-xs font-semibold tracking-wider text-left text-gray-500 uppercase">
                         EMAIL
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-xs font-semibold tracking-wider text-left text-gray-500 uppercase">
                         ROLE
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-xs font-semibold tracking-wider text-left text-gray-500 uppercase">
                         REGISTERED
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-xs font-semibold tracking-wider text-left text-gray-500 uppercase">
                         STATUS
                       </th>
                       <th className="relative px-6 py-3">
@@ -104,14 +121,14 @@ function UserList() {
                         <tr key={user.id}>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
-                              <div className="flex-shrink-0 h-10 w-10">
+                              <div className="flex-shrink-0 w-10 h-10">
                                 <Image
-                                  className="h-10 w-10 rounded-full"
+                                  className="w-10 h-10 rounded-full"
                                   height="48px"
                                   width="48px"
                                   src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}&format=svg`}
                                   alt={`${user.first_name}'s profile picture'`}
-                                ></Image>{' '}
+                                ></Image>
                               </div>
                               <div className="ml-4">
                                 <div className="text-sm font-medium text-gray-700">
@@ -130,12 +147,12 @@ function UserList() {
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className=" text-sm text-gray-500">
-                              {user.user_role.replace('App/', '')}{' '}
+                            <div className="text-sm text-gray-500 ">
+                              {user.user_role.replace('App/', '')}
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className=" text-sm text-gray-500">
+                            <div className="text-sm text-gray-500 ">
                               {formatToDate(user.created_at)} a las {formatToTime(user.created_at)}
                             </div>
                           </td>
