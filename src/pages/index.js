@@ -8,6 +8,7 @@ import { formatToDate, formatToTime } from '../shared/utils/dates.util';
 
 function UserList() {
   const [orderBy, setOrderBy] = useState(null);
+  const [userStatus, setUserStatus] = useState(null);
   const [users, setUsers] = useState([]);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
@@ -23,7 +24,7 @@ function UserList() {
     async function fetchUsers() {
       try {
         setStatus('idle');
-        const users = await getAll({ sort: orderBy });
+        const users = await getAll({ sort: orderBy, status: userStatus });
 
         setUsers(users);
         setStatus('resolved');
@@ -34,7 +35,7 @@ function UserList() {
     }
 
     fetchUsers();
-  }, [orderBy]);
+  }, [orderBy, userStatus]);
 
   if (status === 'idle') {
     return (
@@ -115,6 +116,7 @@ function UserList() {
                       </th>
                     </tr>
                   </thead>
+
                   <tbody className="bg-white divide-y divide-gray-200">
                     {users?.map((user) => {
                       return (
@@ -128,7 +130,7 @@ function UserList() {
                                   width="48px"
                                   src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}&format=svg`}
                                   alt={`${user.first_name}'s profile picture'`}
-                                ></Image>
+                                />
                               </div>
                               <div className="ml-4">
                                 <div className="text-sm font-medium text-gray-700">
