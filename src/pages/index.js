@@ -44,7 +44,7 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <h1 className="mt-10 text-2xl font-semibold text-gray-900">Loading...</h1>
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Loading...</h1>
       </>
     );
   }
@@ -56,7 +56,7 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <h1 className="mt-10 text-2xl font-semibold text-gray-900">{error}</h1>
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">{error}</h1>
       </>
     );
   }
@@ -69,7 +69,7 @@ function UserList() {
             <title>Users</title>
           </Head>
 
-          <h1 className="mt-10 text-2xl font-semibold text-gray-900">There is no users</h1>
+          <h1 className="text-2xl font-semibold tracking-wide text-gray-900">There is no users</h1>
         </>
       );
     }
@@ -80,7 +80,7 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <h1 className="mt-10 text-2xl font-semibold text-gray-900">Users</h1>
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Users</h1>
 
         <div className="flex flex-col mt-8">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

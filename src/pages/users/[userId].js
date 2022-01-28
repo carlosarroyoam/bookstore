@@ -1,13 +1,14 @@
 import { getById } from '../../modules/users/user.service';
 
-function UserDetails({ userById }) {
+function UserDetails({ user }) {
   return (
     <>
-      <p>
-        {userById.first_name} {userById.last_name}
-      </p>
-      <p>{userById.email}</p>
-      <p>{userById.user_role.replace('App/', '')}</p>
+      <h1 className="text-2xl tracking-wide text-gray-900">
+        {user.first_name} {user.last_name}
+      </h1>
+
+      <p className="text-base text-gray-700">{user.email}</p>
+      <p className="text-base text-gray-700">{user.user_role.replace('App/', '')}</p>
     </>
   );
 }
@@ -15,9 +16,9 @@ function UserDetails({ userById }) {
 UserDetails.getInitialProps = async (context) => {
   const { userId } = context.query;
 
-  const userById = await getById({ userId });
+  const user = await getById({ userId });
 
-  return { userById };
+  return { user };
 };
 
 export default UserDetails;
