@@ -1,8 +1,17 @@
+import Head from 'next/head';
+import Link from 'next/link';
 import { getById } from '../../modules/users/user.service';
 
 function UserDetails({ user }) {
   return (
     <>
+      <Head>
+        <title>User details</title>
+      </Head>
+      <Link href={'/'}>
+        <a className="text-sm font-medium text-blue-400 hover:text-blue-700">Volver atras</a>
+      </Link>
+
       <h1 className="text-2xl tracking-wide text-gray-900">
         {user.first_name} {user.last_name}
       </h1>
