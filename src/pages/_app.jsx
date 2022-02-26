@@ -1,3 +1,4 @@
+import { AuthProvider } from '../contexts/AuthContext';
 import '../styles/globals.css';
 
 import Footer from '../shared/components/footer/Footer';
@@ -7,13 +8,15 @@ import Header from '../shared/components/header/Header';
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      {/* <Header /> */}
+      <AuthProvider>
+        {/* <Header /> */}
 
-      <Main>
-        <Component {...pageProps} />
-      </Main>
+        <Main>
+          <Component {...pageProps} />
+        </Main>
 
-      {/* <Footer /> */}
+        {/* <Footer /> */}
+      </AuthProvider>
     </>
   );
 }

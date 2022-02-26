@@ -1,9 +1,12 @@
 import axios from 'axios';
 const token =
-  'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJSb2xlIjoiQXBwL0FkbWluIiwiaWF0IjoxNjQ1NjQ0Mzk4LCJleHAiOjE2NDU2NDc5OTgsImlzcyI6Im5vZGVqc19hcGkifQ.2CkDU9AtyqR7W-RxYzqAmqg5SCIxXCAEwPZvkPv4s1w';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJSb2xlIjoiQXBwL0FkbWluIiwiaWF0IjoxNjQ1ODI0NDY3LCJleHAiOjE2NDU4MjgwNjcsImlzcyI6Im5vZGVqc19hcGkifQ.9mD79l6Nb7IVsrwO_N04r58Hnpqlpc4x7XShVJww-y8';
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
 });
 
 export async function getAll({ skip = 0, limit = 100, sort, status, search }) {

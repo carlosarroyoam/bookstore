@@ -1,5 +1,6 @@
 module.exports = {
-  reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
   images: {
     domains: ['ui-avatars.com'],
   },
