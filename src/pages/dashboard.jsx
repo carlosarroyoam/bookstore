@@ -38,6 +38,8 @@ export default function Dashboard() {
                       className="w-8 h-8"
                       src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                       alt="Workflow"
+                      height={32}
+                      width={32}
                     />
                   </div>
                   <div className="hidden md:block">
@@ -82,7 +84,9 @@ export default function Dashboard() {
                               <span className="sr-only">Open user menu</span>
                               <Image
                                 className="w-8 h-8 rounded-full"
-                                src={user?.avatar_url}
+                                src={`https://ui-avatars.com/api/?name=carlos\sarroyo&format=svg`}
+                                height="48px"
+                                width="48px"
                                 alt=""
                               />
                             </Menu.Button>
@@ -169,7 +173,13 @@ export default function Dashboard() {
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <Image className="w-10 h-10 rounded-full" src={user?.avatar_url} alt="" />
+                    <Image
+                      className="w-10 h-10 rounded-full"
+                      src={`https://ui-avatars.com/api/?name=carlos\sarroyo&format=svg`}
+                      height="48px"
+                      width="48px"
+                      alt=""
+                    />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
@@ -225,30 +235,21 @@ export default function Dashboard() {
   );
 }
 
-export const getServerSideProps = async (ctx) => {
-  const { ['nextauth.token']: token } = parseCookies(ctx);
+export const getServerSideProps = async (context) => {
+  const { access_token } = parseCookies(context);
 
-  if (!token) {
+  if (!access_token) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/login',
         permanent: false,
       },
     };
   }
 
-  try {
-    const { userId } = context.query;
+  const users = await getAll({});
 
-    const user = await getById({ userId });
-
-    return {
-      user,
-      token,
-    };
-  } catch (error) {
-    return {
-      error,
-    };
-  }
+  return {
+    props: { users, access_token },
+  };
 };

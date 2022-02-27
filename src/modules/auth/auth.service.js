@@ -7,11 +7,9 @@ const apiClient = axios.create({
 export async function login({ email, password, device_fingerprint }) {
   try {
     const response = await apiClient.post('/auth/login', {
-      body: {
-        email,
-        password,
-        device_fingerprint,
-      },
+      email,
+      password,
+      device_fingerprint,
     });
 
     console.log({ email, password, device_fingerprint });

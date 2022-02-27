@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/head';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { parseCookies } from 'nookies';
 import { AuthContext } from '../contexts/AuthContext';
 import { LockClosedIcon } from '@heroicons/react/solid';
 
@@ -14,9 +15,9 @@ export default function Home() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
       <Head>
-        <title>Home</title>
+        <title>Log in</title>
       </Head>
 
       <div className="w-full max-w-sm space-y-8">
@@ -104,3 +105,20 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = async (context) => {
+  const { access_token } = parseCookies(context);
+
+  if (access_token) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
