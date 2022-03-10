@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { parseCookies } from 'nookies';
 import Head from 'next/head';
 import Link from 'next/link';

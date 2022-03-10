@@ -8,10 +8,10 @@ import { LockClosedIcon } from '@heroicons/react/solid';
 
 export default function Home() {
   const { register, handleSubmit } = useForm();
-  const { signIn } = useContext(AuthContext);
+  const { logIn } = useContext(AuthContext);
 
-  async function handleSignIn(data) {
-    await signIn(data);
+  async function handleLogIn(data) {
+    await logIn(data);
   }
 
   return (
@@ -31,7 +31,7 @@ export default function Home() {
             Sign in to your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(handleSignIn)}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(handleLogIn)}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
