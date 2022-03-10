@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
 import Head from 'next/head';
 import Link from 'next/link';
 import { getById } from '../../modules/users/user.service';
 
-function UserDetails() {
+export default function UserDetails() {
   const { query } = useRouter();
   const [user, setUsers] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -73,4 +74,19 @@ function UserDetails() {
   }
 }
 
-export default UserDetails;
+export const getServerSideProps = async (context) => {
+  const { access_token } = parseCookies(context);
+
+  if (!access_token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

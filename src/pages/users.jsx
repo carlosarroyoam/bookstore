@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { parseCookies } from 'nookies';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,7 +7,7 @@ import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
 import { getAll } from '../modules/users/user.service';
 import { formatToDate, formatToTime } from '../shared/utils/dates.util';
 
-function UserList() {
+export default function UserList() {
   const [orderBy, setOrderBy] = useState(null);
   const [userStatus, setUserStatus] = useState(null);
   const [users, setUsers] = useState([]);
@@ -190,4 +191,19 @@ function UserList() {
   }
 }
 
-export default UserList;
+export const getServerSideProps = async (context) => {
+  const { access_token } = parseCookies(context);
+
+  if (!access_token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
