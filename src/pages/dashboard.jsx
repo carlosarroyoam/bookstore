@@ -15,8 +15,6 @@ function classNames(...classes) {
 }
 
 export default function Dashboard() {
-  const { user } = useContext(AuthContext);
-
   useEffect(() => {
     // api.get('/users');
   }, []);
@@ -236,20 +234,9 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps = async (context) => {
-  const { access_token } = parseCookies(context);
-
-  if (!access_token) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-
   const users = await getAll({});
 
   return {
-    props: { users, access_token },
+    props: { users },
   };
 };

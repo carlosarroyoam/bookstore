@@ -56,7 +56,7 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">{error}</h1>
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Error: {error}</h1>
       </>
     );
   }

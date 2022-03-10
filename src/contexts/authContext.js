@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import { setCookie, parseCookies } from 'nookies';
 import Router from 'next/router';
 
@@ -11,30 +11,15 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const isAuthenticated = !!user;
 
-  // useEffect(() => {
-  //   const { access_token } = parseCookies();
-
-  //   if (access_token) {
-  //     recoverUserInformation().then((response) => {
-  //       setUser(response.user);
-  //     });
-  //   }
-  // }, []);
-
   async function signIn({ email, password }) {
     const { device_fingerprint } = parseCookies();
+    if (!device_fingerprint) setCookie(undefined, 'device_fingerprint', uuidv4());
 
     const user = await login({
       email,
       password,
-      device_fingerprint: device_fingerprint ?? uuidv4(),
+      device_fingerprint: device_fingerprint,
     });
-
-    setCookie(undefined, 'access_token', user.access_token);
-
-    setCookie(undefined, 'refresh_token', user.refresh_token);
-
-    setCookie(undefined, 'device_fingerprint', user.device_fingerprint);
 
     setUser(user);
 
