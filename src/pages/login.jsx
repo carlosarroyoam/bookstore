@@ -15,7 +15,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex items-center justify-center px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <Head>
         <title>Log in</title>
       </Head>
