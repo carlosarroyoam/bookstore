@@ -84,8 +84,8 @@ export default function UserList() {
         <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Users</h1>
 
         <div className="flex flex-col mt-8">
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div className="-my-2 overflow-x-auto">
+            <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-100">
@@ -129,7 +129,7 @@ export default function UserList() {
                                   className="w-10 h-10 rounded-full"
                                   height="48px"
                                   width="48px"
-                                  src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}&format=svg`}
+                                  src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}`}
                                   alt={`${user.first_name}'s profile picture'`}
                                 />
                               </div>

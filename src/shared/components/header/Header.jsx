@@ -9,7 +9,7 @@ export default function Header() {
   };
 
   return (
-    <header className="container mx-auto">
+    <header className="container">
       <button className="ml-auto" onClick={handleLogOutButtonClick}>
         Log out
       </button>
