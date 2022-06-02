@@ -1,4 +1,4 @@
-import apiClient from '../../shared/lib/axios';
+import apiClient from '../common/lib/axios';
 
 export async function getAll({ skip = 0, limit = 100, sort, status, search }) {
   try {

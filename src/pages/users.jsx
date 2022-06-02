@@ -4,8 +4,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
-import { getAll } from '../modules/users/user.service';
-import { formatToDate, formatToTime } from '../shared/utils/dates.util';
+import { getAll } from '../services/user.service';
+import { formatToDate, formatToTime } from '../common/utils/dates.util';
 
 export default function UserList() {
   const [orderBy, setOrderBy] = useState(null);

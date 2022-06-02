@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import { parseCookies } from 'nookies';
 import Router from 'next/router';
 
-import { login, logout } from '../modules/auth/auth.service';
+import { login, logout } from '../services/auth.service';
 
 export const AuthContext = createContext({});
 
