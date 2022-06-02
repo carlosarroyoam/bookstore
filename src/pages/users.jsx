@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { parseCookies } from 'nookies';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
-import { getAll } from '../modules/users/user.service';
-import { formatToDate, formatToTime } from '../shared/utils/dates.util';
+import { getAll } from '../services/user.service';
+import { formatToDate, formatToTime } from '../common/utils/dates.util';
 
-function UserList() {
+export default function UserList() {
   const [orderBy, setOrderBy] = useState(null);
   const [userStatus, setUserStatus] = useState(null);
   const [users, setUsers] = useState([]);
@@ -56,7 +57,7 @@ function UserList() {
           <title>Users</title>
         </Head>
 
-        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">{error}</h1>
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Error: {error}</h1>
       </>
     );
   }
@@ -83,8 +84,8 @@ function UserList() {
         <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Users</h1>
 
         <div className="flex flex-col mt-8">
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div className="-my-2 overflow-x-auto">
+            <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-100">
@@ -128,7 +129,7 @@ function UserList() {
                                   className="w-10 h-10 rounded-full"
                                   height="48px"
                                   width="48px"
-                                  src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}&format=svg`}
+                                  src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}`}
                                   alt={`${user.first_name}'s profile picture'`}
                                 />
                               </div>
@@ -190,4 +191,19 @@ function UserList() {
   }
 }
 
-export default UserList;
+export const getServerSideProps = async (context) => {
+  const { refresh_token } = parseCookies(context);
+
+  if (!refresh_token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

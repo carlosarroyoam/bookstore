@@ -1,49 +1,92 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
 import Head from 'next/head';
 import Link from 'next/link';
-import { getById } from '../../modules/users/user.service';
+import { getById } from '../../services/user.service';
 
-function UserDetails({ user, error }) {
-  if (!user)
+export default function UserDetails() {
+  const { query } = useRouter();
+  const [user, setUsers] = useState([]);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        setStatus('idle');
+        const user = await getById({ userId: query.userId });
+
+        setUsers(user);
+        setStatus('resolved');
+      } catch (err) {
+        setError(err);
+        setStatus('rejected');
+      }
+    }
+
+    fetchUser();
+  }, [query.userId]);
+
+  if (status === 'idle') {
     return (
       <>
-        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">{error}</h1>
+        <Head>
+          <title>User details</title>
+        </Head>
+
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Loading...</h1>
       </>
     );
+  }
 
-  return (
-    <>
-      <Head>
-        <title>User details</title>
-      </Head>
+  if (status === 'rejected') {
+    return (
+      <>
+        <Head>
+          <title>User details</title>
+        </Head>
 
-      <Link href={'/'}>
-        <a className="text-sm font-medium text-blue-400 hover:text-blue-700">Volver atras</a>
-      </Link>
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Error: {error}</h1>
+      </>
+    );
+  }
 
-      <h1 className="text-2xl font-semibold tracking-wide text-gray-900">
-        {user.first_name} {user.last_name}
-      </h1>
+  if (status === 'resolved') {
+    return (
+      <>
+        <Head>
+          <title>User details</title>
+        </Head>
 
-      <p className="text-base text-gray-700">{user.email}</p>
-      <p className="text-base text-gray-700">{user.user_role.replace('App/', '')}</p>
-    </>
-  );
+        <Link href={'/users'}>
+          <a className="text-sm font-medium text-blue-400 hover:text-blue-700">Volver atras</a>
+        </Link>
+
+        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">
+          {user.first_name} {user.last_name}
+        </h1>
+
+        <p className="text-base text-gray-700">{user.email}</p>
+        <p className="text-base text-gray-700">{user.user_role.replace('App/', '')}</p>
+      </>
+    );
+  }
 }
 
-UserDetails.getInitialProps = async (context) => {
-  try {
-    const { userId } = context.query;
+export const getServerSideProps = async (context) => {
+  const { access_token } = parseCookies(context);
 
-    const user = await getById({ userId });
-
+  if (!access_token) {
     return {
-      user,
-    };
-  } catch (error) {
-    return {
-      error,
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
     };
   }
-};
 
-export default UserDetails;
+  return {
+    props: {},
+  };
+};
