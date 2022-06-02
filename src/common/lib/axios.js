@@ -16,6 +16,7 @@ function createAxiosResponseInterceptor() {
     (error) => {
       const { device_fingerprint } = parseCookies();
 
+      //TODO add validation for error with no response and request different of login
       // Reject promise if usual error
       if (error.response.status !== 401) {
         return Promise.reject(error);
