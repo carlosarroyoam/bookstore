@@ -1,5 +1,5 @@
 import { AuthProvider } from '../contexts/AuthContext';
-import { setCookie } from 'nookies';
+import { setCookie, parseCookies } from 'nookies';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/globals.css';
 
@@ -8,7 +8,8 @@ import Main from '../components/main/Main';
 import Header from '../components/header/Header';
 
 function MyApp({ Component, pageProps }) {
-  setCookie(undefined, 'device_fingerprint', uuidv4());
+  const { device_fingerprint } = parseCookies();
+  if (!device_fingerprint) setCookie(undefined, 'device_fingerprint', uuidv4());
 
   return (
     <>

@@ -107,9 +107,9 @@ export default function Home() {
 }
 
 export const getServerSideProps = async (context) => {
-  const { access_token } = parseCookies(context);
+  const { refresh_token } = parseCookies(context);
 
-  if (access_token) {
+  if (refresh_token) {
     return {
       redirect: {
         destination: '/users',

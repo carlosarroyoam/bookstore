@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import Head from 'next/head';
 import Link from 'next/link';
-import { getById } from '../../modules/users/user.service';
+import { getById } from '../../services/user.service';
 
 export default function UserDetails() {
   const { query } = useRouter();

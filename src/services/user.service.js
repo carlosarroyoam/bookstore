@@ -16,13 +16,13 @@ export async function getAll({ skip = 0, limit = 100, sort, status, search }) {
 
     return users;
   } catch (err) {
-    if (err.response.status === 401) return Promise.reject(err.response.data.message);
+    // if (err.response.status === 401) return Promise.reject(err.response.data.message);
 
-    if (err.response.status === 403) return Promise.reject(err.response.data.message);
+    // if (err.response.status === 403) return Promise.reject(err.response.data.message);
 
-    if (err.response.status === 422) return Promise.reject(err.response.data.message);
+    // if (err.response.status === 422) return Promise.reject(err.response.data.message);
 
-    if (err.response.status === 500) return Promise.reject(err.response.data.message);
+    // if (err.response.status === 500) return Promise.reject(err.response.data.message);
 
     return Promise.reject('Error while retrieving user');
   }

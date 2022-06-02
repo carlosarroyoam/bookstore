@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Header() {
-  const { logOut } = useContext(AuthContext);
+  const { logOut, isAuthenticated } = useContext(AuthContext);
 
   const handleLogOutButtonClick = async () => {
     await logOut();
@@ -10,9 +10,11 @@ export default function Header() {
 
   return (
     <header className="container">
-      <button className="ml-auto" onClick={handleLogOutButtonClick}>
-        Log out
-      </button>
+      {isAuthenticated && (
+        <button className="ml-auto" onClick={handleLogOutButtonClick}>
+          Log out
+        </button>
+      )}
     </header>
   );
 }
