@@ -1,11 +1,10 @@
-import { AuthProvider } from '../contexts/AuthContext';
-import { setCookie, parseCookies } from 'nookies';
+import { parseCookies, setCookie } from 'nookies';
 import { v4 as uuidv4 } from 'uuid';
-import '../styles/globals.css';
-
 import Footer from '../components/footer/Footer';
-import Main from '../components/main/Main';
 import Header from '../components/header/Header';
+import Main from '../components/main/Main';
+import { AuthProvider } from '../contexts/AuthContext';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   const { device_fingerprint } = parseCookies();
@@ -20,7 +19,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </Main>
 
-        {/* <Footer /> */}
+        <Footer />
       </AuthProvider>
     </>
   );

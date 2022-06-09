@@ -1,12 +1,11 @@
-import Head from 'next/head';
-import Image from 'next/head';
+import { LockClosedIcon } from '@heroicons/react/solid';
+import { default as Head, default as Image } from 'next/head';
+import { parseCookies } from 'nookies';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { parseCookies } from 'nookies';
 import { AuthContext } from '../contexts/AuthContext';
-import { LockClosedIcon } from '@heroicons/react/solid';
 
-export default function Home() {
+export default function Login() {
   const { register, handleSubmit } = useForm();
   const { logIn } = useContext(AuthContext);
 
@@ -66,7 +65,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
                 id="remember_me"
@@ -84,7 +83,7 @@ export default function Home() {
                 Forgot your password?
               </a>
             </div>
-          </div>
+          </div> */}
 
           <div>
             <button

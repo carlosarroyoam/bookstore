@@ -1,11 +1,11 @@
-import { useEffect, useState, useContext } from 'react';
-import { parseCookies } from 'nookies';
-import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
-import { getAll } from '../services/user.service';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { parseCookies } from 'nookies';
+import { useEffect, useState } from 'react';
 import { formatToDate, formatToTime } from '../common/utils/dates.util';
+import { getAll } from '../services/user.service';
 
 export default function UserList() {
   const [orderBy, setOrderBy] = useState(null);

@@ -15,22 +15,21 @@
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "axios": "^0.21.4",
-    "babel-plugin-styled-components": "^1.13.2",
     "cross-env": "^7.0.3",
-    "next": "^12.0.10",
+    "next": "^12.1.6",
     "nookies": "^2.5.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-hook-form": "^7.27.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-hook-form": "^7.31.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.7",
     "eslint": "7.32.0",
     "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.14",
     "prettier": "^2.3.2",
-    "tailwindcss": "^3.0.11"
+    "tailwindcss": "^3.0.24"
   }
 }
