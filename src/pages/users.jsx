@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
 import { formatToDate, formatToTime } from '../common/utils/dates.util';
-import { getAll } from '../services/user.service';
+import * as userService from '../services/user.service';
 
 export default function UserList() {
   const [orderBy, setOrderBy] = useState(null);
@@ -25,7 +25,7 @@ export default function UserList() {
     async function fetchUsers() {
       try {
         setStatus('idle');
-        const users = await getAll({ sort: orderBy, status: userStatus });
+        const users = await userService.getAll({ sort: orderBy, status: userStatus });
 
         setUsers(users);
         setStatus('resolved');

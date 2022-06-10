@@ -1,5 +1,6 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
-import { default as Head, default as Image } from 'next/head';
+import { default as Head } from 'next/head';
+import { default as Image } from 'next/image';
 import { parseCookies } from 'nookies';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,8 +21,10 @@ export default function Login() {
       </Head>
 
       <div className="w-full max-w-sm space-y-8">
-        <div>
+        <div className="flex flex-col">
           <Image
+            width={64}
+            height={64}
             className="w-auto h-12 mx-auto"
             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
             alt="Workflow"
