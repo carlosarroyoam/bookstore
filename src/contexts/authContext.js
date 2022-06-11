@@ -27,7 +27,7 @@ export function AuthProvider({ authenticated, children }) {
 
     setIsAuthenticated(true);
 
-    Router.push('/users');
+    Router.push('/');
   }
 
   async function logOut() {

@@ -115,7 +115,7 @@ export const getServerSideProps = async (context) => {
   if (refresh_token) {
     return {
       redirect: {
-        destination: '/users',
+        destination: '/',
         permanent: false,
       },
     };
