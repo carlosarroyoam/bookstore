@@ -127,8 +127,8 @@ export default function UserList() {
                               <div className="flex-shrink-0 w-10 h-10">
                                 <Image
                                   className="w-10 h-10 rounded-full"
-                                  height="48px"
-                                  width="48px"
+                                  height={48}
+                                  width={48}
                                   src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}`}
                                   alt={`${user.first_name}'s profile picture'`}
                                 />
@@ -142,10 +142,11 @@ export default function UserList() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="text-sm text-gray-500">
-                              <Link href={`mailto:${user.email}`}>
-                                <a className="text-sm font-medium text-blue-400 hover:text-blue-700">
-                                  {user.email}
-                                </a>
+                              <Link
+                                href={`mailto:${user.email}`}
+                                className="text-sm font-medium text-blue-400 hover:text-blue-700"
+                              >
+                                {user.email}
                               </Link>
                             </div>
                           </td>
@@ -171,10 +172,11 @@ export default function UserList() {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <Link href={`/users/${user.id}`}>
-                              <a className="text-sm font-medium text-blue-400 hover:text-blue-700">
-                                Edit
-                              </a>
+                            <Link
+                              href={`/users/${user.id}`}
+                              className="text-sm font-medium text-blue-400 hover:text-blue-700"
+                            >
+                              Edit
                             </Link>
                           </td>
                         </tr>

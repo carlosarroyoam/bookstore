@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { parseCookies } from 'nookies';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+import { useEffect, useState } from 'react';
 import { getById } from '../../services/user.service';
 
 export default function UserDetails() {
   const { query } = useRouter();
-  const [user, setUsers] = useState([]);
+  const [user, setUser] = useState(undefined);
   const [status, setStatus] = useState('idle');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(undefined);
 
   useEffect(() => {
     async function fetchUser() {
@@ -17,7 +17,7 @@ export default function UserDetails() {
         setStatus('idle');
         const user = await getById({ userId: query.userId });
 
-        setUsers(user);
+        setUser(user);
         setStatus('resolved');
       } catch (err) {
         setError(err);
@@ -59,11 +59,11 @@ export default function UserDetails() {
           <title>User details</title>
         </Head>
 
-        <Link href={'/users'}>
-          <a className="text-sm font-medium text-blue-400 hover:text-blue-700">Volver atras</a>
+        <Link href={'/'} className="text-sm font-medium text-blue-400 hover:text-blue-700">
+          Volver atras
         </Link>
 
-        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">
+        <h1 className="mt-8 text-2xl font-semibold tracking-wide text-gray-900">
           {user.first_name} {user.last_name}
         </h1>
 
