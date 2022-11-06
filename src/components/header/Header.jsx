@@ -7,7 +7,11 @@ export default function Header() {
   const { logOut, isAuthenticated } = useContext(AuthContext);
 
   const handleLogOutButtonClick = async () => {
-    await logOut();
+    try {
+      await logOut();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

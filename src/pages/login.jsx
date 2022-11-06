@@ -11,7 +11,11 @@ export default function Login() {
   const { logIn } = useContext(AuthContext);
 
   async function handleLogIn(data) {
-    await logIn(data);
+    try {
+      await logIn(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

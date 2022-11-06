@@ -19,25 +19,33 @@ export function AuthProvider({ authenticated, children }) {
   }, []);
 
   async function logIn({ email, password }) {
-    await login({
-      email,
-      password,
-      device_fingerprint: deviceFingerprint,
-    });
+    try {
+      await login({
+        email,
+        password,
+        device_fingerprint: deviceFingerprint,
+      });
 
-    setIsAuthenticated(true);
+      setIsAuthenticated(true);
 
-    Router.push('/');
+      Router.push('/');
+    } catch (error) {
+      throw error;
+    }
   }
 
   async function logOut() {
-    await logout({
-      device_fingerprint: deviceFingerprint,
-    });
+    try {
+      await logout({
+        device_fingerprint: deviceFingerprint,
+      });
 
-    setIsAuthenticated(false);
+      setIsAuthenticated(false);
 
-    Router.push('/login');
+      Router.push('/login');
+    } catch (error) {
+      throw error;
+    }
   }
 
   return (
