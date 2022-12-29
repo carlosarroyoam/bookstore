@@ -16,8 +16,8 @@ export default function UserList() {
 
   const handleNameButtonClick = () => {
     setOrderBy((currentValue) => {
-      if (currentValue === 'first_name') setOrderBy('-first_name');
-      else setOrderBy('first_name');
+      if (currentValue === 'first_name') return '-first_name';
+      else return 'first_name';
     });
   };
 
@@ -86,7 +86,7 @@ export default function UserList() {
         <div className="flex flex-col mt-8">
           <div className="-my-2 overflow-x-auto">
             <div className="inline-block min-w-full align-middle">
-              <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+              <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-sm">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-100">
                     <tr>
@@ -118,7 +118,7 @@ export default function UserList() {
                     </tr>
                   </thead>
 
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-gray-50 divide-y divide-gray-200">
                     {users?.map((user) => {
                       return (
                         <tr key={user.id}>

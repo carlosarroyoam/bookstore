@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { parseCookies } from 'nookies';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -14,7 +13,7 @@ function createAxiosResponseInterceptor() {
   const interceptor = apiClient.interceptors.response.use(
     (response) => response,
     (error) => {
-      const { device_fingerprint } = parseCookies();
+      const device_fingerprint = localStorage.getItem('device_fingerprint');
 
       //TODO add validation for error with no response and request different of login
       // Reject promise if usual error
