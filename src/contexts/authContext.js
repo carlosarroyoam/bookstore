@@ -1,5 +1,4 @@
 import Router from 'next/router';
-import { parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { login, logout } from '../services/auth.service';
@@ -11,11 +10,11 @@ export function AuthProvider({ authenticated, children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(authenticated);
 
   useEffect(() => {
-    if (!parseCookies().device_fingerprint) {
-      setCookie(undefined, 'device_fingerprint', uuidv4());
+    if (!localStorage.getItem('device_fingerprint')) {
+      localStorage.setItem('device_fingerprint', uuidv4());
     }
 
-    setDevicefingerprint(parseCookies().device_fingerprint);
+    setDevicefingerprint(localStorage.getItem('device_fingerprint'));
   }, []);
 
   async function logIn({ email, password }) {
