@@ -37,6 +37,7 @@ function createAxiosResponseInterceptor() {
         })
         .catch((error) => {
           this.router.push('/login');
+
           return Promise.reject(error);
         })
         .finally(createAxiosResponseInterceptor);

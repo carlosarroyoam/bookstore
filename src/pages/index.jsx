@@ -1,4 +1,4 @@
-import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from '@heroicons/react/solid';
+import { ArrowNarrowDownIcon, ArrowNarrowUpIcon, PlusIcon } from '@heroicons/react/solid';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import * as userService from '../services/user.service';
 
 export default function UserList() {
   const [orderBy, setOrderBy] = useState(null);
-  const [userStatus, setUserStatus] = useState(null);
+  const [userStatus] = useState(null);
   const [users, setUsers] = useState([]);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ export default function UserList() {
   const handleNameButtonClick = () => {
     setOrderBy((currentValue) => {
       if (currentValue === 'first_name') return '-first_name';
-      else return 'first_name';
+      return 'first_name';
     });
   };
 
@@ -81,12 +81,22 @@ export default function UserList() {
           <title>Users</title>
         </Head>
 
-        <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Users</h1>
+        <div className="flex justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-wide text-gray-900">Users</h1>
+            <p className="text-gray-500 mt-2 text-sm">Search and manage system users.</p>
+          </div>
+
+          <button className="flex items-center px-8 rounded font-medium text-sm bg-gray-900 text-gray-50 hover:bg-gray-800 active:scale-95 transition-colors duration-200 ease-in">
+            <span className="uppercase">Add new User</span>
+            <PlusIcon className="h-5 w-5 ml-3 text-current" />
+          </button>
+        </div>
 
         <div className="flex flex-col mt-8">
           <div className="-my-2 overflow-x-auto">
             <div className="inline-block min-w-full align-middle">
-              <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-sm">
+              <div className="overflow-hidden border-b border-gray-200 shadow rounded">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-100">
                     <tr>
@@ -129,7 +139,7 @@ export default function UserList() {
                                   className="w-10 h-10 rounded-full"
                                   height={48}
                                   width={48}
-                                  src={`https://ui-avatars.com/api/?name=${user.first_name}\s${user.last_name}`}
+                                  src={`https://ui-avatars.com/api/?name=${user.first_name}\+${user.last_name}`}
                                   alt={`${user.first_name}'s profile picture'`}
                                 />
                               </div>
@@ -162,7 +172,7 @@ export default function UserList() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span
-                              className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              className={`px-3 py-1 inline-flex text-xs font-semibold rounded-full ${
                                 user.deleted_at !== null
                                   ? 'bg-red-100 text-red-800'
                                   : 'bg-green-100 text-green-800'

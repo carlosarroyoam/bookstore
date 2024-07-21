@@ -23,6 +23,7 @@ export default function Login() {
       <Head>
         <title>Log in</title>
       </Head>
+
       <div className="flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
         <div className="w-full max-w-sm space-y-8">
           <div className="flex flex-col">
@@ -37,6 +38,7 @@ export default function Login() {
               Sign in to your account
             </h2>
           </div>
+
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(handleLogIn)}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
@@ -72,25 +74,13 @@ export default function Login() {
               </div>
             </div>
 
-            {/* <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember_me"
-                name="remember_me"
-                type="checkbox"
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-              />
-              <label htmlFor="remember_me" className="block ml-2 text-sm text-gray-900">
-                Remember me
-              </label>
+            <div className="flex items-center justify-end">
+              <div className="text-sm">
+                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                  Forgot your password?
+                </a>
+              </div>
             </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Forgot your password?
-              </a>
-            </div>
-          </div> */}
 
             <div>
               <button

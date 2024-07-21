@@ -23,7 +23,7 @@ export default function Header() {
 
         {isAuthenticated && (
           <button
-            className="ml-auto flex items-center px-8 py-2 rounded font-medium text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors duration-200 ease-in border border-gray-300"
+            className="ml-auto flex items-center px-6 py-2 rounded font-medium text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 ease-in border border-gray-300"
             onClick={handleLogOutButtonClick}
           >
             <span className="uppercase">Log out</span>
