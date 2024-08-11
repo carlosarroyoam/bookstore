@@ -87,10 +87,12 @@ export default function UserList() {
             <p className="text-gray-500 mt-2 text-sm">Search and manage system users.</p>
           </div>
 
-          <button className="flex items-center px-8 rounded font-medium text-sm bg-gray-900 text-gray-50 hover:bg-gray-800 active:scale-95 transition-colors duration-200 ease-in">
-            <span className="uppercase">Add new User</span>
-            <PlusIcon className="h-5 w-5 ml-3 text-current" />
-          </button>
+          <div>
+            <button className="flex items-center grow-0 px-6 py-2 rounded font-medium text-sm bg-gray-900 text-gray-50 hover:bg-gray-800 active:scale-95 transition-colors duration-200 ease-in">
+              <span className="uppercase">Add new User</span>
+              <PlusIcon className="h-5 w-5 ml-3 text-current" />
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-col mt-8">

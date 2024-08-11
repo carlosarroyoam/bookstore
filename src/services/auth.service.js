@@ -8,7 +8,7 @@ export async function login({ email, password, device_fingerprint }) {
       device_fingerprint,
     });
 
-    const userDetails = response.data.data;
+    const userDetails = response.data.user;
 
     return userDetails;
   } catch (err) {

@@ -12,7 +12,7 @@ export async function getAll({ skip = 0, limit = 100, sort, status, search }) {
       },
     });
 
-    const users = response.data.data;
+    const users = response.data.users;
 
     return users;
   } catch (err) {
@@ -32,7 +32,7 @@ export async function getById({ userId }) {
   try {
     const response = await apiClient.get(`/users/${userId}`);
 
-    const userById = response.data.data;
+    const userById = response.data.user;
 
     return userById;
   } catch (err) {
