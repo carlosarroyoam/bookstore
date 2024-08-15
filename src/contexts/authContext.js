@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { login, logout } from '../services/auth.service';
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext();
 
 export function AuthProvider({ authenticated, children }) {
   const [deviceFingerprint, setDevicefingerprint] = useState();

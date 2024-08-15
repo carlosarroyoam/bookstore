@@ -3,7 +3,7 @@ import { parseCookies } from 'nookies';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import Main from '../components/main/Main';
-import { AuthProvider } from '../contexts/AuthContext';
+import { AuthProvider } from '../contexts/authContext';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps, authenticated }) {
@@ -11,11 +11,9 @@ function MyApp({ Component, pageProps, authenticated }) {
     <>
       <AuthProvider authenticated={authenticated}>
         <Header />
-
         <Main>
           <Component {...pageProps} />
         </Main>
-
         <Footer />
       </AuthProvider>
     </>

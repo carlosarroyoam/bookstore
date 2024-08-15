@@ -1,7 +1,7 @@
 import { LogoutIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../../contexts/authContext';
 
 export default function Header() {
   const { logOut, isAuthenticated } = useContext(AuthContext);
