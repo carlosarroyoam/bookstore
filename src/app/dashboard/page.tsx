@@ -39,14 +39,17 @@ export default function Home() {
 
   if (isLoading)
     return (
-      <div>
+      <>
         <Skeleton className="h-7 w-40" />
         <Skeleton className="mt-2 h-5 w-96" />
         <Skeleton className="mt-6 h-96 w-full" />
-      </div>
+      </>
     );
 
-  if (error) return <div>{error.message}</div>;
+  if (error)
+    return (
+      <h2 className="text-2xl font-bold tracking-tight">{error.message}</h2>
+    );
 
   return (
     <section>

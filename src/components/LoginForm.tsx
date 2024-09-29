@@ -22,6 +22,7 @@ import { useAuth } from "@/hooks/useAuth";
 import axios from "@/lib/axios";
 import { getDevicefingerprint } from "@/lib/device-fingerprint";
 import { loginFormSchema, LoginFormSchemaType } from "@/lib/zod";
+import { LoginResponse } from "@/types/LoginResponse";
 import { User } from "@/types/User";
 
 const loginFn = async (values: LoginFormSchemaType) => {
@@ -29,14 +30,14 @@ const loginFn = async (values: LoginFormSchemaType) => {
 
   const {
     data: { user },
-  } = await axios.post("/auth/login", {
+  } = await axios.post<LoginResponse>("/auth/login", {
     email: values.email,
     password: values.password,
     device_fingerprint: deviceFingerprint,
   });
 
   return {
-    id: user.user_id,
+    id: user.id,
     email: user.email,
     first_name: user.first_name,
     last_name: user.last_name,
@@ -51,6 +52,10 @@ const LoginForm = () => {
 
   const form = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const { mutate: logIn, isPending } = useMutation({
@@ -89,13 +94,6 @@ const LoginForm = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-bold tracking-tight">
-        Log into your account
-      </h2>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Enter your email below to log into your account.
-      </p>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
           <FormField

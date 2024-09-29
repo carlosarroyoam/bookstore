@@ -1,20 +1,17 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type User = {
-  id?: number;
-  email?: string;
-  first_name?: string;
-  last_name?: string;
-  user_role_id?: number;
-  user_role?: string;
+import { User } from "@/types/User";
+
+type SessionData = Partial<User> & {
+  isAuth: boolean;
 };
 
-type AuthState = {
-  session: User & { isAuth: boolean };
+interface AuthState {
+  session: SessionData;
   saveSession: (user: User) => void;
   destroySession: () => void;
-};
+}
 
 export const useAuth = create<AuthState>()(
   persist(
