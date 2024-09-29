@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type User = {
-  user_id?: number;
+  id?: number;
   email?: string;
   first_name?: string;
   last_name?: string;
@@ -12,7 +12,7 @@ type User = {
 
 type AuthState = {
   session: User & { isAuth: boolean };
-  createSession: (user: User) => void;
+  saveSession: (user: User) => void;
   destroySession: () => void;
 };
 
@@ -20,8 +20,8 @@ export const useAuth = create<AuthState>()(
   persist(
     (set) => ({
       session: { isAuth: false },
-      createSession: (user: User) =>
-        set(() => ({ session: { isAuth: true, ...user } })),
+      saveSession: (user: User) =>
+        set(() => ({ session: { ...user, isAuth: true } })),
       destroySession: () => set(() => ({ session: { isAuth: false } })),
     }),
     {

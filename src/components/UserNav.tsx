@@ -15,19 +15,20 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/hooks/useAuth";
 import axios from "@/lib/axios";
+import { getDevicefingerprint } from "@/lib/device-fingerprint";
 import { useMutation } from "@tanstack/react-query";
 
 const logOutFn = async () => {
-  const device_fingerprint = localStorage.getItem("device_fingerprint");
+  const deviceFingerprint = getDevicefingerprint();
 
   await axios.post("/auth/logout", {
-    device_fingerprint,
+    device_fingerprint: deviceFingerprint,
   });
 };
 
 const UserNav = () => {
-  const { session, destroySession } = useAuth();
   const router = useRouter();
+  const { session, destroySession } = useAuth();
   const { mutate: logOut } = useMutation({
     mutationFn: logOutFn,
     onSuccess: () => {

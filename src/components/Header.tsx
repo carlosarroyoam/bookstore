@@ -7,7 +7,7 @@ const Header = async () => {
     <header className="bg-gray-200 py-4">
       <div className="container flex items-center justify-between">
         <Link
-          href="/"
+          href="/dashboard"
           className="font-semibold text-gray-900 hover:text-gray-600"
         >
           e-commerce

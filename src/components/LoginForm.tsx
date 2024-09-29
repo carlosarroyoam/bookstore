@@ -6,7 +6,6 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { v4 as uuidv4 } from "uuid";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -21,16 +20,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/useAuth";
 import axios from "@/lib/axios";
+import { getDevicefingerprint } from "@/lib/device-fingerprint";
 import { loginFormSchema, LoginFormSchemaType } from "@/lib/zod";
 import { User } from "@/types/User";
 
 const loginFn = async (values: LoginFormSchemaType) => {
-  let deviceFingerprint = localStorage.getItem("device_fingerprint");
-
-  if (!deviceFingerprint) {
-    localStorage.setItem("device_fingerprint", uuidv4());
-    deviceFingerprint = localStorage.getItem("device_fingerprint");
-  }
+  const deviceFingerprint = getDevicefingerprint();
 
   const {
     data: { user },
@@ -41,7 +36,7 @@ const loginFn = async (values: LoginFormSchemaType) => {
   });
 
   return {
-    user_id: user.user_id,
+    id: user.user_id,
     email: user.email,
     first_name: user.first_name,
     last_name: user.last_name,
@@ -51,8 +46,8 @@ const loginFn = async (values: LoginFormSchemaType) => {
 };
 
 const LoginForm = () => {
-  const { createSession } = useAuth();
   const router = useRouter();
+  const { saveSession } = useAuth();
 
   const form = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
@@ -61,7 +56,7 @@ const LoginForm = () => {
   const { mutate: logIn, isPending } = useMutation({
     mutationFn: (values: LoginFormSchemaType) => loginFn(values),
     onSuccess: (user) => {
-      createSession(user);
+      saveSession(user);
       router.refresh();
       router.push("/dashboard");
     },

@@ -1,5 +1,7 @@
 import Axios, { AxiosError } from "axios";
 
+import { getDevicefingerprint } from "@/lib/device-fingerprint";
+
 const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   withCredentials: true,
@@ -8,7 +10,7 @@ const axios = Axios.create({
 axios.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
-    const device_fingerprint = localStorage.getItem("device_fingerprint");
+    const deviceFingerprint = getDevicefingerprint();
     const status = error.response?.status;
     const originalRequest = error.config!;
 
@@ -22,7 +24,7 @@ axios.interceptors.response.use(
 
     try {
       await axios.post("/auth/refresh-token", {
-        device_fingerprint,
+        device_fingerprint: deviceFingerprint,
       });
 
       return axios(originalRequest);
@@ -30,8 +32,6 @@ axios.interceptors.response.use(
       if (err instanceof AxiosError) {
         console.log(err.message);
       }
-
-      localStorage.removeItem("session");
       window.location.href = "/auth/login";
       return Promise.reject(err);
     }

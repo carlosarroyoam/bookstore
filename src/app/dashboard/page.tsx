@@ -20,15 +20,11 @@ import { formatToDate } from "@/lib/dates";
 import { User, UsersResponse } from "@/types/User";
 
 const getUsersFn = async () => {
-  try {
-    const {
-      data: { users },
-    } = await axios.get<UsersResponse>("/users");
+  const {
+    data: { users },
+  } = await axios.get<UsersResponse>("/users");
 
-    return users;
-  } catch (error) {
-    throw error;
-  }
+  return users;
 };
 
 export default function Home() {
@@ -79,7 +75,7 @@ export default function Home() {
           <TableBody>
             {users?.length ? (
               users!.map((user: User) => (
-                <TableRow key={user.user_id}>
+                <TableRow key={user.id}>
                   <TableCell>
                     <Avatar className="size-8">
                       <AvatarImage
