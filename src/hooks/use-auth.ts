@@ -1,9 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { User } from "@/types/User";
+import { User } from "@/types/user";
 
-type SessionData = Partial<User> & {
+type SessionData = Partial<
+  Pick<
+    User,
+    "id" | "email" | "first_name" | "last_name" | "user_role_id" | "user_role"
+  >
+> & {
   isAuth: boolean;
 };
 

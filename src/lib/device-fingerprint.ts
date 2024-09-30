@@ -1,14 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 
-const DEVICE_FINGERPRINT_KEY = "device-fingerprint";
+const DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME = "device-fingerprint";
 
 export function getDevicefingerprint() {
-  let deviceFingerprint = localStorage.getItem(DEVICE_FINGERPRINT_KEY);
-
-  if (!deviceFingerprint) {
-    localStorage.setItem(DEVICE_FINGERPRINT_KEY, uuidv4());
-    deviceFingerprint = localStorage.getItem(DEVICE_FINGERPRINT_KEY);
+  if (!localStorage.getItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME)) {
+    localStorage.setItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME, uuidv4());
   }
 
-  return deviceFingerprint;
+  return localStorage.getItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME);
 }

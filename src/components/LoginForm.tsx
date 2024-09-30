@@ -18,12 +18,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/use-auth";
 import axios from "@/lib/axios";
 import { getDevicefingerprint } from "@/lib/device-fingerprint";
 import { loginFormSchema, LoginFormSchemaType } from "@/lib/zod";
-import { LoginResponse } from "@/types/LoginResponse";
-import { User } from "@/types/User";
+import { LoginResponse } from "@/types/login-response";
+import { User } from "@/types/user";
 
 const loginFn = async (values: LoginFormSchemaType) => {
   const deviceFingerprint = getDevicefingerprint();
@@ -62,8 +62,8 @@ const LoginForm = () => {
     mutationFn: (values: LoginFormSchemaType) => loginFn(values),
     onSuccess: (user) => {
       saveSession(user);
-      router.refresh();
       router.push("/dashboard");
+      router.refresh();
     },
     onError: (err) => {
       if (err instanceof AxiosError) {

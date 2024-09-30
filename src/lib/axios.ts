@@ -32,6 +32,7 @@ axios.interceptors.response.use(
       if (err instanceof AxiosError) {
         console.log(err.message);
       }
+
       window.location.href = "/auth/login";
       return Promise.reject(err);
     }

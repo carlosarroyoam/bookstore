@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/table";
 import axios from "@/lib/axios";
 import { formatToDate } from "@/lib/dates";
-import { User, UsersResponse } from "@/types/User";
+import { User, UsersResponse } from "@/types/user";
 
 const getUsersFn = async () => {
   const {

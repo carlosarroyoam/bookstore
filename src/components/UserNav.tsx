@@ -1,5 +1,6 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -13,10 +14,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/use-auth";
 import axios from "@/lib/axios";
 import { getDevicefingerprint } from "@/lib/device-fingerprint";
-import { useMutation } from "@tanstack/react-query";
 
 const logOutFn = async () => {
   const deviceFingerprint = getDevicefingerprint();
@@ -33,8 +33,8 @@ const UserNav = () => {
     mutationFn: logOutFn,
     onSuccess: () => {
       destroySession();
-      router.refresh();
       router.push("/auth/login");
+      router.refresh();
     },
   });
 
