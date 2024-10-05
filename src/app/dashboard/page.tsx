@@ -21,7 +21,9 @@ export default function Home() {
         </Button>
       </div>
 
-      <UsersTable />
+      <div className="mt-6">
+        <UsersTable />
+      </div>
     </section>
   );
 }

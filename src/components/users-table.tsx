@@ -50,7 +50,7 @@ const UsersTable = () => {
     );
 
   return (
-    <div className="mt-6 rounded-md border">
+    <div className="rounded-md border">
       <Table>
         <TableHeader className="bg-gray-100">
           <TableRow>
