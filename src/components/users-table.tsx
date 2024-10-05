@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import axios from "@/lib/axios";
-import { formatToDate } from "@/lib/dates";
+import { formatDate } from "@/lib/utils";
 import { User, UsersResponse } from "@/types/user";
 
 const getUsersFn = async () => {
@@ -83,8 +83,8 @@ const UsersTable = () => {
                 </TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.user_role.replace("App/", "")}</TableCell>
-                <TableCell>{formatToDate(user.created_at)}</TableCell>
-                <TableCell>{formatToDate(user.updated_at)}</TableCell>
+                <TableCell>{formatDate(user.created_at)}</TableCell>
+                <TableCell>{formatDate(user.updated_at)}</TableCell>
                 <TableCell>
                   {user.deleted_at === null ? (
                     <Badge variant="secondary">Active</Badge>
