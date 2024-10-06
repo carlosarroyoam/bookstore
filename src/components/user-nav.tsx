@@ -46,7 +46,7 @@ const UserNav = () => {
         <Button variant="ghost" className="relative size-10 rounded-full">
           <Avatar className="size-10">
             <AvatarImage
-              src={`https://ui-avatars.com/api/?name=${session.first_name}+${session.last_name}`}
+              src={`https://ui-avatars.com/api/?name=${session.first_name}%20${session.last_name}&format=svg`}
               alt={`${session.first_name}'s profile picture`}
             />
           </Avatar>
