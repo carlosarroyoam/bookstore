@@ -4,7 +4,7 @@ import UserNav from "@/components/user-nav";
 
 const Header = async () => {
   return (
-    <header className="bg-gray-200 py-4">
+    <header className="bg-gray-100 py-4">
       <div className="container flex items-center justify-between">
         <Link
           href="/dashboard"
