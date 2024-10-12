@@ -52,7 +52,7 @@ const UserNav = () => {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="p-2.5">
         <DropdownMenuLabel className="font-normal">
           <p className="text-sm leading-none">{session.email}</p>
         </DropdownMenuLabel>

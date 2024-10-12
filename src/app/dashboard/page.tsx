@@ -8,8 +8,10 @@ export default function Home() {
     <section>
       <div className="flex gap-4">
         <div className="flex-1">
-          <h2 className="text-2xl font-bold tracking-tight">Users</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+            Users
+          </h2>
+          <p className="mt-1 text-sm">
             A list of all the users registered including their name, email, and
             role.
           </p>

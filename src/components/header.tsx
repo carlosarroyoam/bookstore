@@ -8,7 +8,7 @@ const Header = async () => {
       <div className="container flex items-center justify-between">
         <Link
           href="/dashboard"
-          className="font-semibold text-gray-900 hover:text-gray-600"
+          className="font-semibold text-gray-900 hover:text-gray-700"
         >
           e-commerce
         </Link>

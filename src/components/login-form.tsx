@@ -101,7 +101,7 @@ const LoginForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-gray-900">Email</FormLabel>
                 <FormControl>
                   <Input
                     autoComplete="email"
@@ -109,7 +109,7 @@ const LoginForm = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="font-normal" />
               </FormItem>
             )}
           />
@@ -119,7 +119,7 @@ const LoginForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-gray-900">Password</FormLabel>
                 <FormControl>
                   <Input
                     type="password"
@@ -127,7 +127,7 @@ const LoginForm = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="font-normal" />
               </FormItem>
             )}
           />
