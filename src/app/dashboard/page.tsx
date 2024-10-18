@@ -8,7 +8,7 @@ export default function Home() {
     <section>
       <div className="flex gap-4">
         <div className="flex-1">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-gray-900">
             Users
           </h2>
           <p className="mt-1 text-sm">

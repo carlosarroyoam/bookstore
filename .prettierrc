@@ -1,3 +1,4 @@
 {
+  "tailwindFunctions": ["cva", "cn"],
   "plugins": ["prettier-plugin-tailwindcss"]
 }
