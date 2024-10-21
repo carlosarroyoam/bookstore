@@ -50,9 +50,9 @@ const UsersTable = () => {
     );
 
   return (
-    <div className="rounded-md border">
+    <div className="overflow-hidden rounded-md border">
       <Table>
-        <TableHeader className="bg-gray-100">
+        <TableHeader className="bg-muted">
           <TableRow>
             <TableHead className="w-8">
               <span className="sr-only">Profile picture</span>
@@ -104,7 +104,7 @@ const UsersTable = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={7} className="h-24 text-center">
+              <TableCell colSpan={8} className="h-24 text-center">
                 No results.
               </TableCell>
             </TableRow>

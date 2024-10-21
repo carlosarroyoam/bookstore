@@ -53,8 +53,13 @@ const UserNav = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="p-2.5">
-        <DropdownMenuLabel className="font-normal">
-          <p className="text-sm leading-none">{session.email}</p>
+        <DropdownMenuLabel>
+          <p className="text-sm leading-none">
+            {session.first_name}&nbsp;{session.last_name}
+          </p>
+          <p className="mt-1 text-sm font-normal leading-none text-muted-foreground">
+            {session.email}
+          </p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => logOut()}>Log out</DropdownMenuItem>

@@ -4,11 +4,11 @@ import UserNav from "@/components/user-nav";
 
 const Header = async () => {
   return (
-    <header className="bg-gray-100 py-4">
+    <header className="border-b bg-muted py-4">
       <div className="container flex items-center justify-between">
         <Link
           href="/dashboard"
-          className="text-xl font-medium tracking-tight text-gray-900 hover:text-gray-700"
+          className="text-xl font-medium tracking-tight text-foreground hover:text-foreground/70"
         >
           e-commerce
         </Link>

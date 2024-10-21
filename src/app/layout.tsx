@@ -23,7 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("text-gray-500 antialiased", inter.className)}>
+      <body
+        className={cn(
+          "bg-background text-muted-foreground antialiased",
+          inter.className,
+        )}
+      >
         <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
