@@ -4,7 +4,7 @@ import { getItem, setItem } from "@/lib/local-storage";
 
 const DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME = "device-fingerprint";
 
-export function getDevicefingerprint() {
+export const getDevicefingerprint = () => {
   if (!getItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME)) {
     setItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME, uuidv4());
   }

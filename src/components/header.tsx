@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import UserNav from "@/components/user-nav";
 
-const Header = async () => {
+const Header = () => {
   return (
     <header className="border-b bg-muted py-4">
       <div className="container flex items-center justify-between">
