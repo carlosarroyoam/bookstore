@@ -9,5 +9,5 @@ export function getDevicefingerprint() {
     setItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME, uuidv4());
   }
 
-  return getItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME);
-}
+  return getItem(DEVICE_FINGERPRINT_LOCAL_STORAGE_KEY_NAME) as string;
+};
