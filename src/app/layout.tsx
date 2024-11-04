@@ -7,7 +7,7 @@ import ReactQueryProvider from "@/providers/react-query-provider";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
